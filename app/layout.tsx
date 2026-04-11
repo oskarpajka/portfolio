@@ -1,18 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/ui/navbar";
 import { Footer } from "@/components/ui/footer";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Oskar Pajka | Full-Stack Developer",
@@ -47,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black selection:bg-black selection:text-white relative min-h-screen flex flex-col overflow-x-hidden`}
+        className="antialiased bg-white text-black selection:bg-black selection:text-white relative min-h-screen flex flex-col overflow-x-hidden"
       >
         <div className="fixed inset-0 pointer-events-none bg-noise z-50 mix-blend-overlay opacity-50"></div>
         <div className="fixed inset-0 pointer-events-none bg-dots opacity-30 z-0"></div>

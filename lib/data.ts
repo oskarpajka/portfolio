@@ -7,6 +7,7 @@ export const siteData = {
     role: "Full-Stack Developer",
     bio: "A Full-Stack Developer passionate about building clean, fast, and accessible web applications. I love experimenting with new frameworks.",
     availability: "Available for work",
+    currentFocus: "Unity3D",
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@oskarpajka.me",
   },
   socials: {
@@ -24,14 +25,13 @@ export const siteData = {
     "Tailwind CSS",
     "PostgreSQL",
     "Python",
-    "C++",
-    "Git",
+    "Unity3D",
   ],
   bentoProjects: [
     {
       id: "portfolio",
       title: "Portfolio Website",
-      description: "A neo-brutalist personal portfolio built with Next.js App Router and Tailwind CSS.",
+      description: "Personal portfolio built with Next.js App Router and Tailwind CSS.",
       tech: ["Next.js", "Tailwind", "TypeScript"],
       link: "https://github.com/oskarpajka/portfolio",
       color: "bg-white",

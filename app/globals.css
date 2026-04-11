@@ -10,27 +10,21 @@
 }
 
 @theme {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-lora: 'Lora', serif;
 
-  --animate-marquee: marquee 25s linear infinite;
-  --animate-marquee2: marquee2 25s linear infinite;
+  --animate-marquee-track: marquee-track 24s linear infinite;
 
-  @keyframes marquee {
+  @keyframes marquee-track {
     0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
-  }
-
-  @keyframes marquee2 {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(0%); }
+    100% { transform: translateX(calc(-50% - 0.5rem)); }
   }
 }
 
 @layer base {
   html {
-    scroll-padding-top: 5rem; /* Accounts for the 20px (5rem) fixed navbar height */
+    scroll-padding-top: 5rem; /* Accounts for the fixed 5rem (80px) navbar height */
   }
 }
 
@@ -45,7 +39,6 @@
   }
 }
 
-.group:hover .animate-marquee,
-.group:hover .animate-marquee2 {
+.group:hover .animate-marquee-track {
   animation-play-state: paused;
 }

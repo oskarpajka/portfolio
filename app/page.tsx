@@ -52,33 +52,20 @@ export default function Home() {
               Core Stack
             </h2>
             
-            <div className="relative flex overflow-x-hidden group">
-              <div className="animate-marquee whitespace-nowrap flex gap-4 items-center">
+            <div className="relative overflow-x-hidden group">
+              <div className="animate-marquee-track flex w-max items-center gap-4 pr-4 whitespace-nowrap">
                 {siteData.skills.map((tech) => (
                   <span key={tech} className="px-4 py-2 bg-black text-white text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors cursor-default">
                     {tech}
                   </span>
                 ))}
-                {/* Duplicate for seamless loop */}
-                {siteData.skills.map((tech) => (
-                  <span key={`${tech}-dup`} className="px-4 py-2 bg-black text-white text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors cursor-default">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              
-              <div className="absolute top-0 animate-marquee2 whitespace-nowrap flex gap-4 items-center">
-                {siteData.skills.map((tech) => (
-                  <span key={`${tech}-dup2`} className="px-4 py-2 bg-black text-white text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors cursor-default">
-                    {tech}
-                  </span>
-                ))}
-                {/* Duplicate for seamless loop */}
-                {siteData.skills.map((tech) => (
-                  <span key={`${tech}-dup3`} className="px-4 py-2 bg-black text-white text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors cursor-default">
-                    {tech}
-                  </span>
-                ))}
+                <div className="flex items-center gap-4 pr-4" aria-hidden="true">
+                  {siteData.skills.map((tech) => (
+                    <span key={`${tech}-dup`} className="px-4 py-2 bg-black text-white text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors cursor-default">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
             
@@ -162,7 +149,7 @@ export default function Home() {
           <BentoCard className="md:col-span-1 lg:col-span-1 md:row-span-1 flex flex-col justify-center items-center text-center bg-white min-h-[200px] md:min-h-0 relative overflow-hidden" delay={0.6}>
             <Terminal className="w-8 h-8 md:w-10 md:h-10 text-black mb-4 relative z-10" />
             <h3 className="text-xs md:text-sm font-black uppercase tracking-widest relative z-10">Exploring</h3>
-            <p className="text-xs md:text-sm font-medium text-black/60 mt-1 relative z-10">{siteData.skills.slice(-2).join(" & ")}</p>
+            <p className="text-xs md:text-sm font-medium text-black/60 mt-1 relative z-10">{siteData.personal.currentFocus}</p>
           </BentoCard>
         </div>
       </section>
