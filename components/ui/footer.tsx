@@ -32,6 +32,12 @@ export function Footer() {
           </div>
 
         </div>
+
+        <div className="mt-8 pt-8 border-t border-white/20 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 text-xs font-bold uppercase tracking-widest text-white/60">
+          <Link href="/privacy-policy" className="hover:text-yellow-400 transition-colors">Privacy Policy</Link>
+          <Link href="/terms-of-service" className="hover:text-yellow-400 transition-colors">Terms of Service</Link>
+          <Link href="/cookie-policy" className="hover:text-yellow-400 transition-colors">Cookie Policy</Link>
+        </div>
         
         <div className="mt-12 md:mt-16 pt-8 border-t-4 border-white/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs md:text-sm font-bold uppercase tracking-widest text-white/50">
           <p>© {new Date().getFullYear()} {siteData.personal.name}. All rights reserved.</p>
