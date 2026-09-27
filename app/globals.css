@@ -14,11 +14,12 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-lora: 'Lora', serif;
 
-  --animate-marquee-track: marquee-track 24s linear infinite;
+  --animate-marquee-track: marquee-track 28s linear infinite;
 
+  /* Track holds two identical halves; -50% loops seamlessly. */
   @keyframes marquee-track {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(calc(-50% - 0.5rem)); }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 }
 
@@ -26,19 +27,78 @@
   html {
     scroll-padding-top: 5rem; /* Accounts for the fixed 5rem (80px) navbar height */
   }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  ::selection {
+    background: #facc15;
+    color: #000;
+  }
+
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: #000 #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #fff;
+    border-left: 2px solid #000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #000;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #dc2626;
+  }
+
+  /* Brutalist fallback ring; uses text color so it reads on any block. */
+  :where(a, button, [role="button"], input, textarea, select):focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 2px;
+  }
 }
 
 @layer utilities {
   .bg-noise {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+    background-repeat: repeat;
   }
-  
+
   .bg-dots {
     background-image: radial-gradient(#000 1px, transparent 1px);
     background-size: 20px 20px;
+    background-repeat: repeat;
+  }
+
+  .bg-dots-light {
+    background-image: radial-gradient(rgb(255 255 255 / 0.35) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-repeat: repeat;
   }
 }
 
 .group:hover .animate-marquee-track {
   animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-track {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
