@@ -96,7 +96,7 @@ export function WorkModal({ work, isOpen, onClose }: WorkModalProps) {
             aria-label="Close modal"
             className="shrink-0 border-2 border-transparent p-2 transition-colors hover:border-black hover:bg-red-500 hover:text-white"
           >
-            <X className="h-7 w-7 md:h-8 md:w-8" />
+            <X aria-hidden="true" className="h-7 w-7 md:h-8 md:w-8" />
           </button>
         </div>
 
@@ -115,7 +115,7 @@ export function WorkModal({ work, isOpen, onClose }: WorkModalProps) {
 
           <div className="mb-12">
             <h3 className="text-xl font-black uppercase tracking-widest mb-4 flex items-center gap-2">
-              <div className="w-3 h-3 bg-blue-500"></div>
+              <div aria-hidden="true" className="w-3 h-3 bg-blue-500"></div>
               Tech Stack
             </h3>
             <div className="flex flex-wrap gap-3">
@@ -137,7 +137,7 @@ export function WorkModal({ work, isOpen, onClose }: WorkModalProps) {
             className="group flex w-full items-center justify-center gap-3 border-4 border-black bg-black px-8 py-4 font-black uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-black sm:w-auto"
           >
             View Project
-            <ArrowUpRight className="h-6 w-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            <ArrowUpRight aria-hidden="true" className="h-6 w-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
           </Link>
         </div>
       </div>

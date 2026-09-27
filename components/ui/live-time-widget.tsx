@@ -4,7 +4,9 @@ import { useSyncExternalStore } from "react";
 import { Globe } from "lucide-react";
 
 const TIME_ZONE = "Europe/Warsaw";
-const TIME_ZONE_LABEL = "Warsaw (CET)";
+// Plain "Warsaw": the zone observes CET in winter and CEST in summer,
+// so a fixed CET suffix would be wrong half the year.
+const TIME_ZONE_LABEL = "Warsaw";
 const PLACEHOLDER = "--:--:--";
 
 let cachedFormatter: Intl.DateTimeFormat | null = null;

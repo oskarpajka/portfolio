@@ -63,7 +63,7 @@ export function CopyEmailButton() {
       onClick={handleCopy}
       aria-label={copied ? `Email ${email} copied to clipboard` : `Copy email address ${email} to clipboard`}
       className={cn(
-        "group flex items-center gap-3 border-2 border-white bg-black px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black",
+        "group flex items-center gap-3 border-2 border-black bg-black px-6 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)] transition-all hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black",
         copied && "bg-green-500 border-green-500 text-black hover:bg-green-400 hover:border-green-400"
       )}
     >

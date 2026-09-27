@@ -11,7 +11,7 @@ export interface MailtoOptions {
 }
 
 // Build a mailto: link with safely encoded subject/body params.
-// Agent 1 (or any contact CTA) can use this without touching page layout.
+// Use siteData.personal.email + siteData.contact.emailSubject with buildContactMailto for the contact CTA.
 export function buildMailto(email: string, options: MailtoOptions = {}): string {
   const params = new URLSearchParams();
   const subject = options.subject?.trim();
@@ -22,8 +22,8 @@ export function buildMailto(email: string, options: MailtoOptions = {}): string 
   return query ? `mailto:${email}?${query}` : `mailto:${email}`;
 }
 
-// Contact CTA mailto link. Agent 1 can pass siteData.personal.email and
-// siteData.contact.emailSubject to wire it into layout later.
+// Contact CTA mailto link. Pass siteData.personal.email and
+// siteData.contact.emailSubject to wire it into the contact section.
 export function buildContactMailto(email: string, subject: string, body?: string): string {
   return buildMailto(email, {
     subject,

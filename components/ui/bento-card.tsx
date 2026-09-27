@@ -15,7 +15,9 @@ export function BentoCard({ children, className, delay = 0 }: BentoCardProps) {
   return (
     <motion.div
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
+      // Reveal on scroll so below-fold cards animate when seen.
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
       transition={{
         duration: reduceMotion ? 0 : 0.5,
         delay: reduceMotion ? 0 : delay,

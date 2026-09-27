@@ -60,13 +60,19 @@ To run this project locally, you will need Node.js and pnpm installed.
 
 ## Screenshots
 
-> Screenshots coming soon. To add one, save an image under `public/screenshots/` and reference it here, e.g. `![Homepage](public/screenshots/homepage.png)`.
+Screenshots coming soon.
+
+- [ ] Homepage hero
+- [ ] Selected work section
+- [ ] Contact section
+
+To add one, save an image under `public/screenshots/` and reference it here.
 
 ## Customization
 
 Site content (projects, skills, bio, and social links) is managed in `lib/data.ts`. You can update this file to modify the portfolio's content without changing the underlying UI components.
 
-Reusable contact helpers (`buildMailto`, `buildContactMailto`) live in `lib/utils.ts`; pass `siteData.personal.email` and `siteData.contact.emailSubject` so Agent 1 can wire the CTA into layout later.
+Reusable contact helpers (`buildMailto`, `buildContactMailto`) live in `lib/utils.ts`. Use `siteData.personal.email` + `siteData.contact.emailSubject` with `buildContactMailto` for the contact CTA.
 
 ## License
 
