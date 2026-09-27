@@ -36,6 +36,28 @@ To run this project locally, you will need Node.js and pnpm installed.
 
 Site content (projects, skills, bio, and social links) is managed in `lib/data.ts`. You can update this file to modify the portfolio's content without changing the underlying UI components.
 
+## Environment Variables
+
+Copy `.env.example` to `.env.local` and adjust the values:
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Description |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Public URL of the deployed site (metadata, sitemap, robots). |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Contact email shown on the site. |
+
+## Scripts
+
+| Command | Description |
+| --- | --- |
+| `pnpm dev` | Start the development server. |
+| `pnpm build` | Create a production build. |
+| `pnpm lint` | Run ESLint. |
+| `pnpm typecheck` | Run TypeScript checks without emitting files. |
+
 ## License
 
 This project is open-source and available under the MIT License.

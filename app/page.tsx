@@ -1,18 +1,13 @@
-"use client";
-
-import { useState } from "react";
 import { BentoCard } from "@/components/ui/bento-card";
 import { CopyEmailButton } from "@/components/ui/copy-email-button";
 import { LiveTimeWidget } from "@/components/ui/live-time-widget";
-import { WorkModal } from "@/components/ui/work-modal";
+import { SelectedWorks } from "@/components/ui/selected-works";
 import { FadeIn } from "@/components/ui/fade-in";
 import { Github, Linkedin, ExternalLink, Terminal, Database, Layout, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { siteData } from "@/lib/data";
 
 export default function Home() {
-  const [selectedWork, setSelectedWork] = useState<typeof siteData.featuredWorks[0] | null>(null);
-
   return (
     <>
       <main className="relative z-10">
@@ -53,19 +48,16 @@ export default function Home() {
             </h2>
             
             <div className="relative overflow-x-hidden group">
-              <div className="animate-marquee-track flex w-max items-center gap-4 pr-4 whitespace-nowrap">
-                {siteData.skills.map((tech) => (
-                  <span key={tech} className="px-4 py-2 bg-black text-white text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors cursor-default">
-                    {tech}
-                  </span>
+              <div className="animate-marquee-track flex w-max items-center whitespace-nowrap">
+                {[0, 1].map((copy) => (
+                  <div key={copy} className="flex items-center gap-4 pr-4" aria-hidden={copy === 1}>
+                    {siteData.skills.map((tech) => (
+                      <span key={`${tech}-${copy}`} className="px-4 py-2 bg-black text-white text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors cursor-default">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 ))}
-                <div className="flex items-center gap-4 pr-4" aria-hidden="true">
-                  {siteData.skills.map((tech) => (
-                    <span key={`${tech}-dup`} className="px-4 py-2 bg-black text-white text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors cursor-default">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
               </div>
             </div>
             
@@ -164,34 +156,7 @@ export default function Home() {
             </div>
           </FadeIn>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {siteData.featuredWorks.map((work, index) => (
-              <FadeIn key={work.id} delay={index * 100}>
-                <button 
-                  onClick={() => setSelectedWork(work)}
-                  aria-label={`View details for ${work.title}`}
-                  className={`w-full text-left group flex flex-col justify-between p-8 border-4 border-black transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] ${work.color} min-h-[300px] cursor-pointer h-full`}
-                >
-                  <div className="flex justify-between items-start mb-8 w-full">
-                    <span className="text-4xl font-black text-black/30">0{index + 1}</span>
-                    <div className="p-3 bg-black text-white group-hover:bg-white group-hover:text-black transition-colors border-2 border-transparent group-hover:border-black">
-                      <ArrowUpRight className="w-6 h-6" />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-4">
-                      {work.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-4">
-                      <span className="font-bold uppercase tracking-widest text-xs bg-white/50 px-3 py-1 border-2 border-black">{work.category}</span>
-                      <span className="font-bold uppercase tracking-widest text-xs bg-black text-white px-3 py-1">{work.year}</span>
-                    </div>
-                  </div>
-                </button>
-              </FadeIn>
-            ))}
-          </div>
+          <SelectedWorks works={siteData.featuredWorks} />
         </div>
       </section>
 
@@ -276,11 +241,6 @@ export default function Home() {
       </section>
       </main>
 
-      <WorkModal 
-        work={selectedWork} 
-        isOpen={!!selectedWork} 
-        onClose={() => setSelectedWork(null)} 
-      />
     </>
   );
 }
