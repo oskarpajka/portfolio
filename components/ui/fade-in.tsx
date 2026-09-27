@@ -11,10 +11,18 @@ interface FadeInProps {
 }
 
 export function FadeIn({ children, className, delay = 0, direction = "up" }: FadeInProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  // Reveal instantly for reduced-motion users; no scroll animation.
+  const [isVisible, setIsVisible] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isVisible) {
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -34,11 +42,9 @@ export function FadeIn({ children, className, delay = 0, direction = "up" }: Fad
     }
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
+      observer.disconnect();
     };
-  }, []);
+  }, [isVisible]);
 
   const directionClasses = {
     up: "translate-y-8",

@@ -17,17 +17,18 @@ export default function Home() {
     <>
       <main className="relative z-10">
         {/* ABOUT / HERO SECTION */}
-        <section id="about" className="p-4 md:p-8 lg:p-12 max-w-6xl mx-auto pt-6 md:pt-20 relative min-h-screen flex flex-col justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-auto md:auto-rows-[200px] grid-flow-dense">
+        <section id="about" className="relative mx-auto flex w-full max-w-6xl flex-col justify-center px-4 py-10 md:px-8 md:py-20 lg:p-12 min-h-[calc(100svh-5rem)]">
+          {/* minmax rows let row-spanning cards grow instead of clipping. */}
+          <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 auto-rows-auto md:auto-rows-[minmax(200px,auto)] grid-flow-dense">
           
           {/* Hero / Bio Card */}
           <BentoCard className="md:col-span-2 lg:col-span-2 md:row-span-2 flex flex-col justify-between bg-yellow-400 min-h-[300px] md:min-h-0 relative" delay={0.1}>
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-bl-full z-0 pointer-events-none"></div>
-            <div className="mt-12 md:mt-0 relative z-10">
-              <h1 className="text-6xl md:text-8xl font-lora tracking-tighter text-black mb-4 leading-none">
+            <div className="relative z-10 min-w-0">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-lora tracking-tighter text-black mb-4 leading-[0.95] break-words">
                 Hi, I&apos;m<br/>{siteData.personal.name.split(' ')[0]}.
               </h1>
-              <p className="text-base md:text-lg text-black/80 max-w-md font-medium">
+              <p className="text-base md:text-lg text-black/80 max-w-md font-medium text-balance">
                 {siteData.personal.bio}
               </p>
             </div>
@@ -52,20 +53,18 @@ export default function Home() {
               Core Stack
             </h2>
             
-            <div className="relative overflow-x-hidden group">
-              <div className="animate-marquee-track flex w-max items-center gap-4 pr-4 whitespace-nowrap">
-                {siteData.skills.map((tech) => (
-                  <span key={tech} className="px-4 py-2 bg-black text-white text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors cursor-default">
-                    {tech}
-                  </span>
+            {/* Two identical halves; -50% keyframe loops without a seam. */}
+            <div className="relative overflow-hidden group">
+              <div className="animate-marquee-track flex w-max whitespace-nowrap">
+                {[0, 1].map((half) => (
+                  <div key={half} aria-hidden={half === 1} className="flex items-center gap-4 pr-4">
+                    {siteData.skills.map((tech) => (
+                      <span key={half === 0 ? tech : `${tech}-dup`} className="px-4 py-2 bg-black text-white text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors cursor-default">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 ))}
-                <div className="flex items-center gap-4 pr-4" aria-hidden="true">
-                  {siteData.skills.map((tech) => (
-                    <span key={`${tech}-dup`} className="px-4 py-2 bg-black text-white text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-colors cursor-default">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
               </div>
             </div>
             
@@ -260,7 +259,7 @@ export default function Home() {
           <FadeIn>
             <div className="flex flex-col items-center">
               <div className="w-12 h-12 md:w-16 md:h-16 bg-orange-500 rotate-45 mb-8 md:mb-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"></div>
-              <h2 className="text-6xl md:text-9xl font-lora tracking-tighter mb-6 relative">
+              <h2 className="text-5xl sm:text-6xl md:text-9xl font-lora tracking-tighter mb-6 relative break-words">
                 Let&apos;s Build.
                 <span className="absolute -top-8 -right-12 font-black uppercase text-3xl text-green-500 rotate-[-15deg] hidden md:block">
                   Together!
