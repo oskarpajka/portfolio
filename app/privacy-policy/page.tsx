@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Oskar Pajka",
+  title: "Privacy Policy",
   description: "Privacy Policy for the Oskar Pajka portfolio website.",
 };
 

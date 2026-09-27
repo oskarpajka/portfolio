@@ -30,10 +30,10 @@ export function LiveTimeWidget() {
 
   if (!mounted) {
     return (
-      <div className="flex items-center gap-3 bg-black text-white px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] opacity-0">
+      <div className="flex items-center gap-3 bg-black text-white px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] opacity-0" title="Local time in Warsaw, Poland (Europe/Warsaw)">
         <Globe className="w-4 h-4 text-blue-400" />
         <div className="flex flex-col">
-          <span className="text-[10px] font-black uppercase tracking-widest text-white/50 leading-none">Local Time</span>
+          <span className="text-[10px] font-black uppercase tracking-widest text-white/50 leading-none">Warsaw, PL</span>
           <span className="text-sm font-bold font-mono tracking-wider leading-none mt-1">00:00:00</span>
         </div>
       </div>
@@ -41,10 +41,10 @@ export function LiveTimeWidget() {
   }
 
   return (
-    <div className="flex items-center gap-3 bg-black text-white px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-opacity duration-300">
+    <div className="flex items-center gap-3 bg-black text-white px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-opacity duration-300" title="Local time in Warsaw, Poland (Europe/Warsaw)">
       <Globe className="w-4 h-4 animate-pulse text-blue-400" />
       <div className="flex flex-col">
-        <span className="text-[10px] font-black uppercase tracking-widest text-white/50 leading-none">Local Time</span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-white/50 leading-none">Warsaw, PL</span>
         <span className="text-sm font-bold font-mono tracking-wider leading-none mt-1">{time}</span>
       </div>
     </div>

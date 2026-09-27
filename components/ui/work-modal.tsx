@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { X, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
@@ -21,23 +21,41 @@ interface WorkModalProps {
 }
 
 export function WorkModal({ work, isOpen, onClose }: WorkModalProps) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
+    if (!isOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
     };
-  }, [isOpen]);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen || !work) return null;
 
+  const hasLink = Boolean(work.link) && work.link !== "#";
+
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8">
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="work-modal-title"
+    >
       {/* Backdrop */}
-      <button 
+      <button
         className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity w-full h-full cursor-default"
         onClick={onClose}
         aria-label="Close modal backdrop"
@@ -45,13 +63,14 @@ export function WorkModal({ work, isOpen, onClose }: WorkModalProps) {
 
       {/* Modal Content */}
       <div className="relative w-full max-w-4xl bg-white border-4 border-black shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] flex flex-col max-h-[90vh] overflow-hidden animate-in fade-in zoom-in-95 duration-300">
-        
+
         {/* Header */}
         <div className="flex items-center justify-between p-6 md:p-8 border-b-4 border-black bg-zinc-100">
-          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">{work.title}</h2>
-          <button 
+          <h2 id="work-modal-title" className="text-3xl md:text-5xl font-black uppercase tracking-tighter">{work.title}</h2>
+          <button
+            ref={closeRef}
             onClick={onClose}
-            aria-label="Close modal"
+            aria-label={`Close details for ${work.title}`}
             className="p-2 hover:bg-red-500 hover:text-white border-2 border-transparent hover:border-black transition-colors"
           >
             <X className="w-8 h-8" />
@@ -87,17 +106,19 @@ export function WorkModal({ work, isOpen, onClose }: WorkModalProps) {
         </div>
 
         {/* Footer */}
-        <div className="p-6 md:p-8 border-t-4 border-black bg-zinc-100 flex justify-end">
-          <Link 
-            href={work.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 bg-black text-white px-8 py-4 font-black uppercase tracking-widest hover:bg-white hover:text-black border-4 border-black transition-colors group"
-          >
-            View Project
-            <ArrowUpRight className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </Link>
-        </div>
+        {hasLink && (
+          <div className="p-6 md:p-8 border-t-4 border-black bg-zinc-100 flex justify-end">
+            <Link
+              href={work.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-black text-white px-8 py-4 font-black uppercase tracking-widest hover:bg-white hover:text-black border-4 border-black transition-colors group"
+            >
+              View Project
+              <ArrowUpRight className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
